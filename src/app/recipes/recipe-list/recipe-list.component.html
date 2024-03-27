@@ -6,6 +6,17 @@
 <hr/>
 <div class="row">
     <div class="col-xs-12">
-        <app-recipe-item *ngFor="let rcp of recipes" [recipe]="rcp"></app-recipe-item>
+        <!-- <app-recipe-item 
+            *ngFor="let rcp of recipes; let r=index" 
+            [recipe]="rcp"
+            [recipeIndex]="r"
+            (getRecipeDetails)="showRecipeDetails($event)"
+        ></app-recipe-item> -->
+        <!-- Don't need the index in the actual solution, we can directly use rcp object -->
+        <app-recipe-item 
+            *ngFor="let rcp of recipes;" 
+            [recipe]="rcp"
+            (getRecipeDetails)="showRecipeDetails(rcp)"
+        ></app-recipe-item>
     </div>
 </div>
