@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,19 +8,18 @@ import { Recipe } from '../recipe.model';
   styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent implements OnInit{
-  recipes: Recipe[] = [
-    new Recipe('Puran Poli', "Maharashtrian dish", "https://foodtrails25.com/wp-content/uploads/2023/09/Puran-Poli-Recipe.jpg"),
-    new Recipe('Amrakhanda', "Delicous dessert made from mango pulp & curd", "https://www.nestleprofessional.in/sites/default/files/2021-08/Amrakhand.jpg")
-  ];
+  recipes: Recipe[];
 
-  @Output() onRecipeDetails = new EventEmitter<Recipe>();
+  // @Output() onRecipeDetails = new EventEmitter<Recipe>();
 
-  showRecipeDetails(selectedRecipe: Recipe) {
-    // console.log('recipe-list rIndex', rIndex, this.recipes[rIndex]);
-    // this.onRecipeDetails.emit(this.recipes[rIndex]);
-    this.onRecipeDetails.emit(selectedRecipe);
-  }
+  constructor(private recipeService: RecipeService) {}
+
   ngOnInit() {
-    
+   this.recipes = this.recipeService.getRecipes(); 
   }
+  // showRecipeDetails(selectedRecipe: Recipe) {
+  //   // console.log('recipe-list rIndex', rIndex, this.recipes[rIndex]);
+  //   // this.onRecipeDetails.emit(this.recipes[rIndex]);
+  //   this.onRecipeDetails.emit(selectedRecipe);
+  // }
 }
