@@ -3,9 +3,10 @@
         <app-recipe-list ></app-recipe-list> <!--(onRecipeDetails)="recipeContent = $event"-->
     </div>
     <div class="col-md-7">
-        <app-recipe-detail *ngIf="recipeContent; else infoText;" [recipeDetail]="recipeContent"></app-recipe-detail> 
-        <ng-template #infoText>
+        <!-- <app-recipe-detail *ngIf="recipeContent; else infoText;" [recipeDetail]="recipeContent"></app-recipe-detail>  -->
+        <router-outlet></router-outlet>
+        <!-- <ng-template #infoText>
             <p>Please select a Recipe!</p>
-        </ng-template>
+        </ng-template> -->
     </div>
 </div>

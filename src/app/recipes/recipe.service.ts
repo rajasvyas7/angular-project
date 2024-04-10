@@ -35,4 +35,11 @@ export class RecipeService {
     return this.recipes.slice();
   } 
 
+  getRecipeById(id: number) {
+    let recipes = this.getRecipes();
+    // console.log('grbi', recipes);
+    
+    return recipes[id];
+  }
+
 }
