@@ -13,8 +13,11 @@
 
         <div class="collapse navbar-collapse"> -->
             <ul class="nav navbar-nav">
-                <li><a href="#" (click)="onMenuClick('Recipes')">Recipes</a></li>
-                <li><a href="#" (click)="onMenuClick('ShoppingList')">Shopping List</a></li>
+                <!-- <li><a style="cursor: pointer;" (click)="onMenuClick('recipes')">Recipes</a></li> -->
+                <!-- Instead of the (click) event we can also use routerLink='' -->
+                <li><a style="cursor: pointer;" routerLink='/recipes' >Recipes</a></li> 
+                <!-- this will also work [routerLink]="['/recipes']"-->
+                <li><a style="cursor: pointer;" routerLink="/shoppingList">Shopping List</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" appDropdown>
