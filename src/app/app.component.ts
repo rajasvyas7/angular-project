@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor (private recipeService: RecipeService) {}
 
-  onMenuSelected(selectedMenu: string) {
-    this.menu = selectedMenu;
-  }
+  // onMenuSelected(selectedMenu: string) {
+  //   this.menu = selectedMenu;
+  // }
 }
