@@ -12,14 +12,15 @@ import { RecipeService } from '../recipe.service';
 })
 export class RecipeDetailComponent implements OnInit {
   recipeDetail: Recipe;
+  recipeId: number;
 
   constructor(private shoppinListService: ShoppingListService, private activatedRoute: ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        let id = +params['id'];   //the id should not be local but class variable
-        this.recipeDetail = this.recipeService.getRecipeById(id);
+        this.recipeId = +params['id'];   //the id should not be local but class variable
+        this.recipeDetail = this.recipeService.getRecipeById(this.recipeId);
       }
     );
   }
