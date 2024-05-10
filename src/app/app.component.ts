@@ -8,9 +8,9 @@ import { RecipeService } from './recipes/recipe.service';
   providers: [RecipeService]
 })
 export class AppComponent {
-  menu:string = "Recipes";
+  // menu:string = "Recipes";
 
-  constructor (private recipeService: RecipeService) {}
+  // constructor (private recipeService: RecipeService) {}
 
   // onMenuSelected(selectedMenu: string) {
   //   this.menu = selectedMenu;

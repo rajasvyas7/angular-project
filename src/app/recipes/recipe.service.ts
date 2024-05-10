@@ -1,4 +1,4 @@
-import { EventEmitter } from "@angular/core";
+// import { EventEmitter } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
 
@@ -25,7 +25,7 @@ export class RecipeService {
     )
   ];
 
-  selectedRecipe = new EventEmitter<Recipe>();
+  // selectedRecipe = new EventEmitter<Recipe>();
 
   getRecipes () {
     /**
