@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, viewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
@@ -17,8 +17,8 @@ export class ShoppingEditComponent {
   constructor(private shoppingListService: ShoppingListService) {}
 
 
-  onAddIngredient() {
-    console.log(this.ingredientForm);
+  onAddIngredient() { // one can also pass form instance ingForm to the function
+    // console.log(this.ingredientForm);
     
     const name = this.ingredientForm.value.name;
     const amnt = this.ingredientForm.value.amount;

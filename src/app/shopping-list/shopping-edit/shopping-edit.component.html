@@ -19,6 +19,7 @@
                         class="form-control" #inputAmount="ngModel" 
                         ngModel name="amount" required 
                         number [ngClass]="{'error-border': inputAmount.touched && inputAmount.invalid}"
+                        pattern="^[1-9]+[0-9]*$"
                     />
                     <span class="help-block" *ngIf="inputAmount.touched && inputAmount.invalid">Enter a valid amount.</span>
                 </div>
