@@ -1,35 +1,64 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
   styleUrl: './shopping-edit.component.css'
 })
-export class ShoppingEditComponent {
+export class ShoppingEditComponent implements OnInit, OnDestroy {
   // @ViewChild('inputName') ipName: ElementRef;
   // @ViewChild('inputAmount') ipAmount: ElementRef; 
   // @Output() ingredientAdded = new EventEmitter<Ingredient>();
   @ViewChild('ingFrm') ingredientForm: NgForm;
+  editorSubscription: Subscription;
+  editMode: boolean = false;
+  editId: number;
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private shoppingListService: ShoppingListService) { }
 
+  ngOnInit(): void {
+    this.editorSubscription = this.shoppingListService.editingStarted.subscribe(
+      (id: number) => {
+        this.editMode = true;
+        this.editId = id;
+        const ingredient = this.shoppingListService.getIngredientById(id);
+        // console.log('edir ingredient', ingredient);
+        this.ingredientForm.setValue({
+          name: ingredient.name,
+          amount: ingredient.amount
+        })
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.editorSubscription.unsubscribe();
+  }
 
   onAddIngredient() { // one can also pass form instance ingForm to the function
     // console.log(this.ingredientForm);
-    
+
     const name = this.ingredientForm.value.name;
     const amnt = this.ingredientForm.value.amount;
     const ingredient = new Ingredient(name, amnt);
-    // this.ingredientAdded.emit(ingredient);
-    this.shoppingListService.addIngredient(ingredient);
+    if (this.editMode) {
+      this.shoppingListService.updateIngredient(this.editId, ingredient);
+    }
+    else {
+      // this.ingredientAdded.emit(ingredient);
+      this.shoppingListService.addIngredient(ingredient);
+    }
+
     this.resetIngredientFrom();
   }
 
   resetIngredientFrom() {
     this.ingredientForm.reset({});
+    this.editMode = false;
   }
 
 }
