@@ -16,7 +16,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   @ViewChild('ingFrm') ingredientForm: NgForm;
   editorSubscription: Subscription;
   editMode: boolean = false;
-  editId: number;
+  editId: number = null;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
@@ -39,7 +39,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.editorSubscription.unsubscribe();
   }
 
-  onAddIngredient() { // one can also pass form instance ingForm to the function
+  onSaveIngredient() { // one can also pass form instance ingForm to the function
     // console.log(this.ingredientForm);
 
     const name = this.ingredientForm.value.name;
@@ -59,6 +59,14 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   resetIngredientFrom() {
     this.ingredientForm.reset({});
     this.editMode = false;
+    this.editId = null
+  }
+
+  deleteIngredient() {
+    if (this.editId !== null && confirm("Are you sure you want to delete the ingredient? This can't be undone.")) {
+      this.shoppingListService.deleteIngredient(this.editId);
+      this.resetIngredientFrom();
+    }
   }
 
 }

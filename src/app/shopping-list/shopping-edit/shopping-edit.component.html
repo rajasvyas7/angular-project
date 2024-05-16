@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-12">
-        <form #ingFrm="ngForm" (ngSubmit)="onAddIngredient()">
+        <form #ingFrm="ngForm" (ngSubmit)="onSaveIngredient()">
             <div class="row">
                 <div class="col-sm-5 form-group">
                     <label for="name">Name</label>
@@ -29,9 +29,18 @@
                     <button 
                         class="btn btn-success" type="submit"
                         [disabled]="ingFrm.invalid"
-                    >Save</button>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                    <button class="btn btn-primary" type="reset" (click)="resetIngredientFrom()">Clear</button>
+                    >
+                        {{ editMode ? 'Update' : 'Add' }}
+                    </button>
+                    <button 
+                        class="btn btn-danger" type="button"
+                        [disabled]="editId === null"
+                        (click)="deleteIngredient()"
+                    >Delete</button>
+                    <button 
+                        class="btn btn-primary" type="reset" 
+                        (click)="resetIngredientFrom()"
+                    >Clear</button>
                 </div>
             </div>
         </form>
