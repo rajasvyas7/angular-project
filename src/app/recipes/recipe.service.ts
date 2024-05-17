@@ -22,6 +22,11 @@ export class RecipeService {
         new Ingredient('Curd', 0.500),
         new Ingredient('Mango pulp', 2)
       ]
+    ),
+    new Recipe(
+      'Rajma Chawal', 
+      "A must have morth indian dish", 
+      "https://i.ndtvimg.com/i/2018-05/rajma-chawal_650x400_71525765959.jpg"
     )
   ];
 

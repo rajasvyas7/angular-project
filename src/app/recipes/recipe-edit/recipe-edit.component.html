@@ -1,1 +1,68 @@
-<p>recipe-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onRecipeSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" class="form-control" formControlName="name">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" id="imageUrl" class="form-control" formControlName="imageUrl">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <img [src]="recipeForm.get('imageUrl').value" class="image-responsive" style="max-height: 150px;">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea row=6 id="description" class="form-control" formControlName="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12" formGroupName="ingredients">
+          <label ><h3>Ingredients</h3></label>
+          <button type="button" class="btn btn-success" (click)="addIngredientFC()">Add Ingredient</button>
+          <div class="row" *ngFor="let ingredient of getIngredientsFC(); let ingrId = index" 
+            [formGroupName]="ingrId"
+          >
+            <div class="col-xs-3">
+              <label>Ingredient {{ingrId+1}} name: </label>
+            </div>
+            <div class="col-xs-5">
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+            <div class="col-xs-1">
+              <label>Amount: </label>
+            </div>
+            <div class="col-xs-2">
+              <input type="text" class="form-control" formControlName="amount"/>
+            </div>
+            <div class="col-xs-1">
+              <button type="button" class="btn btn-danger">X</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
