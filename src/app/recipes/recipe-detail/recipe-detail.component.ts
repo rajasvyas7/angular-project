@@ -46,6 +46,6 @@ export class RecipeDetailComponent implements OnInit {
   deleteRecipeItem(id: number) {
     // console.log('delete recipe id', id)
     this.recipeService.deleteRecipe(id);
-    this.router.navigate(['recipes']);
+    this.router.navigate(['/recipes']);
   }
 }
