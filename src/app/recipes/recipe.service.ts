@@ -1,6 +1,7 @@
 // import { EventEmitter } from "@angular/core";
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
+import { Subject } from "rxjs";
 
 export class RecipeService {
   private recipes: Recipe[] = [
@@ -30,6 +31,8 @@ export class RecipeService {
     )
   ];
 
+  recipesChanged = new Subject<Recipe[]>();
+
   // selectedRecipe = new EventEmitter<Recipe>();
 
   getRecipes () {
@@ -45,6 +48,18 @@ export class RecipeService {
     // console.log('grbi', recipes);
     
     return recipes[id];
+  }
+
+  addRecipe(rcp: Recipe) {
+    const newId = this.recipes.length;
+    this.recipes.push(rcp);
+    this.recipesChanged.next(this.getRecipes());    
+    return newId;
+  }
+
+  updateRecipe(id: number, rcp: Recipe) {
+    this.recipes[id] = rcp;
+    this.recipesChanged.next(this.getRecipes());
   }
 
 }
